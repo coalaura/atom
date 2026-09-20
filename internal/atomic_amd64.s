@@ -1,4 +1,5 @@
 // Copyright 2015 The Go Authors. All rights reserved.
+// Copyright 2026 coalaura (github.com/coalaura). All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -71,6 +72,49 @@ casloop:
 	JNZ casloop
 	MOVQ 	AX, ret+16(FP)
 	RET
+
+// func SwapIfLessUint64(addr *uint64, new, mask, sign uint64) (old uint64, swapped bool)
+// Atomically:
+//	old = *addr
+//	swapped = (new^sign)&mask < (old^sign)&mask
+//	if swapped {
+//		*addr = new
+//	}
+//	return old, swapped
+TEXT ·SwapIfLessUint64(SB), NOSPLIT, $0-41
+	MOVQ	addr+0(FP), BX
+	MOVQ	new+8(FP), CX
+	MOVQ	mask+16(FP), SI
+	MOVQ	sign+24(FP), DI
+	MOVQ	CX, R8
+	XORQ	DI, R8
+	ANDQ	SI, R8
+	MOVQ	(BX), AX
+retry:
+	MOVQ	AX, DX
+	XORQ	DI, DX
+	ANDQ	SI, DX
+	CMPQ	R8, DX
+	JCC	unchanged
+	// On failure CMPXCHGQ refreshes AX with the full current value.
+	LOCK
+	CMPXCHGQ	CX, (BX)
+	JNE	retry
+	MOVB	$1, swapped+40(FP)
+	MOVQ	AX, old+32(FP)
+	RET
+unchanged:
+	MOVB	$0, swapped+40(FP)
+	MOVQ	AX, old+32(FP)
+	RET
+
+// func SwapIfGreaterUint64(addr *uint64, new, mask, sign uint64) (old uint64, swapped bool)
+// Complementing the masked key bits reverses their unsigned order.
+TEXT ·SwapIfGreaterUint64(SB), NOSPLIT, $0-41
+	MOVQ	sign+24(FP), AX
+	XORQ	mask+16(FP), AX
+	MOVQ	AX, sign+24(FP)
+	JMP	·SwapIfLessUint64(SB)
 
 // func And64(addr *uint64, v uint64) old uint64
 TEXT ·And64(SB), NOSPLIT, $0-24

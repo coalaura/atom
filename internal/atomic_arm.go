@@ -1,4 +1,5 @@
 // Copyright 2009 The Go Authors. All rights reserved.
+// Copyright 2026 coalaura (github.com/coalaura). All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -130,3 +131,22 @@ func Load64(addr *uint64) uint64
 
 //go:noescape
 func Store64(addr *uint64, v uint64)
+
+// Local conditional-swap support for the pre-v7 ARM lock fallback.
+
+//go:noescape
+func swapIfLessLocked(addr *uint64, new, mask, sign uint64) (old uint64, swapped bool)
+
+// lockSwap64 joins the upstream striped lock used on pre-v7 ARM. The assembly
+// entry point has already checked alignment; fault on nil before taking a lock.
+// The caller releases the lock with Store(&lock.v, 0), as spinlock.unlock does.
+//
+//go:nosplit
+func lockSwap64(addr *uint64) *spinlock {
+	_ = *addr
+
+	valueLock := addrLock(addr)
+	valueLock.lock()
+
+	return valueLock
+}
