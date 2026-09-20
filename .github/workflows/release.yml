@@ -154,7 +154,10 @@ jobs:
       - name: Compile and link every test package
         run: |
           mkdir -p "$RUNNER_TEMP/atom-tests"
-          go test -c -o "$RUNNER_TEMP/atom-tests/" ./...
+          packages=$(go list ./...)
+          for package in $packages; do
+            go test -c -o "$RUNNER_TEMP/atom-tests/${package//\//_}.test" "$package"
+          done
 
   wasm:
     name: Execute / js / wasm

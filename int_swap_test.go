@@ -238,6 +238,86 @@ func testIntConditionalSwaps[T testInteger](t *testing.T) {
 	t.Run("randomized", testIntConditionalSwapsRandomized[T])
 }
 
+func TestIntConditionalSwapsMixedConcurrent(t *testing.T) {
+	var (
+		value     atom.Int[uint64]
+		waitGroup sync.WaitGroup
+		deltas    [intTestGoroutines]uint64
+	)
+
+	start := make(chan struct{})
+	waitGroup.Add(intTestGoroutines)
+
+	for worker := range intTestGoroutines {
+		go func() {
+			defer waitGroup.Done()
+
+			<-start
+
+			for operation := range intTestOps {
+				// Exercise both words on 32-bit targets and wraparound arithmetic.
+				candidate := uint64(operation+1)*0x9e3779b97f4a7c15 ^ uint64(worker)
+
+				switch worker % 7 {
+				case 0:
+					value.Add(1)
+					deltas[worker]++
+				case 1:
+					old := value.Swap(candidate)
+					deltas[worker] += candidate - old
+				case 2:
+					old := value.Load()
+
+					swapped := value.CompareAndSwap(old, candidate)
+					if swapped {
+						deltas[worker] += candidate - old
+					}
+				case 3:
+					old := value.And(candidate)
+					deltas[worker] += (old & candidate) - old
+				case 4:
+					old := value.Or(candidate)
+					deltas[worker] += (old | candidate) - old
+				case 5:
+					old, swapped := value.SwapIfLess(candidate)
+					if swapped != (candidate < old) {
+						t.Errorf("SwapIfLess(%v) = (%v, %v)", candidate, old, swapped)
+					}
+
+					if swapped {
+						deltas[worker] += candidate - old
+					}
+				case 6:
+					old, swapped := value.SwapIfGreater(candidate)
+					if swapped != (candidate > old) {
+						t.Errorf("SwapIfGreater(%v) = (%v, %v)", candidate, old, swapped)
+					}
+
+					if swapped {
+						deltas[worker] += candidate - old
+					}
+				}
+			}
+		}()
+	}
+
+	close(start)
+	waitGroup.Wait()
+
+	var total uint64
+
+	for _, delta := range deltas {
+		total += delta
+	}
+
+	// All successful RMWs, including stdlib and custom operations, must belong
+	// to one atomic sequence. Their deltas telescope modulo 2^64.
+	got := value.Load()
+	if got != total {
+		t.Fatalf("mixed updates produced %v, want sum of atomic changes %v", got, total)
+	}
+}
+
 func testIntConditionalSwapsRandomized[T testInteger](t *testing.T) {
 	var value atom.Int[T]
 

@@ -61,7 +61,7 @@ old, swapped := limit.SwapIfLess(5)   // 10, true; limit is now 5
 old, swapped = limit.SwapIfGreater(3) // 5, false; limit remains 5
 ```
 
-The zero value starts at zero, so initialize it appropriately when tracking a minimum or maximum. Conditional swaps perform their comparisons and any required retries inside architecture-specific assembly. Race builds use instrumented `sync/atomic` operations.
+The zero value starts at zero, so initialize it appropriately when tracking a minimum or maximum. Standard integer operations call `sync/atomic` directly, enabling the compiler's atomic intrinsics. Conditional swaps use architecture-specific assembly, with stdlib Load/CAS fallbacks on ARM without v7 atomics and 32-bit MIPS to share the standard library's locking protocol. Race builds use instrumented `sync/atomic` operations.
 
 ## License
 

@@ -22,13 +22,13 @@ type Int[T ~int | ~int8 | ~int16 | ~int32 | ~int64 | ~uint | ~uint8 | ~uint16 | 
 }
 
 // Load atomically loads and returns the value stored in x.
-func (x *Int[T]) Load() T { return T(internal.LoadUint64(&x.v)) }
+func (x *Int[T]) Load() T { return T(atomic.LoadUint64(&x.v)) }
 
 // Store atomically stores val into x.
-func (x *Int[T]) Store(val T) { internal.StoreUint64(&x.v, uint64(val)) }
+func (x *Int[T]) Store(val T) { atomic.StoreUint64(&x.v, uint64(val)) }
 
 // Swap atomically stores new into x and returns the previous value.
-func (x *Int[T]) Swap(new T) (old T) { return T(internal.SwapUint64(&x.v, uint64(new))) }
+func (x *Int[T]) Swap(new T) (old T) { return T(atomic.SwapUint64(&x.v, uint64(new))) }
 
 // SwapIfLess atomically stores new into x if new is less than the current value.
 // It returns the previous value and whether the swap occurred.
@@ -62,19 +62,19 @@ func (x *Int[T]) SwapIfGreater(new T) (old T, swapped bool) {
 
 // CompareAndSwap executes the compare-and-swap operation for x.
 func (x *Int[T]) CompareAndSwap(old, new T) (swapped bool) {
-	return internal.CompareAndSwapUint64(&x.v, uint64(old), uint64(new))
+	return atomic.CompareAndSwapUint64(&x.v, uint64(old), uint64(new))
 }
 
 // Add atomically adds delta to x and returns the new value.
-func (x *Int[T]) Add(delta T) (new T) { return T(internal.AddUint64(&x.v, uint64(delta))) }
+func (x *Int[T]) Add(delta T) (new T) { return T(atomic.AddUint64(&x.v, uint64(delta))) }
 
 // And atomically performs a bitwise AND operation on x using the bitmask
 // provided as mask and returns the old value.
-func (x *Int[T]) And(mask T) (old T) { return T(internal.AndUint64(&x.v, uint64(mask))) }
+func (x *Int[T]) And(mask T) (old T) { return T(atomic.AndUint64(&x.v, uint64(mask))) }
 
 // Or atomically performs a bitwise OR operation on x using the bitmask
 // provided as mask and returns the old value.
-func (x *Int[T]) Or(mask T) (old T) { return T(internal.OrUint64(&x.v, uint64(mask))) }
+func (x *Int[T]) Or(mask T) (old T) { return T(atomic.OrUint64(&x.v, uint64(mask))) }
 
 // noCopy may be added to structs which must not be copied
 // after the first use.
