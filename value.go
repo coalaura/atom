@@ -135,6 +135,72 @@ func (v *Value[T]) Swap(new T) (old T) {
 	}
 }
 
+// SwapIfFunc stores new into Value when shouldSwap returns true for the
+// currently stored value. It returns the value observed by shouldSwap and
+// whether the swap succeeded. For an empty Value, shouldSwap receives the zero
+// value of T.
+//
+// If another goroutine changes the Value while shouldSwap is running,
+// SwapIfFunc retries with the latest value. Therefore, shouldSwap may be called
+// multiple times and must be safe for concurrent use.
+//
+// All calls to SwapIfFunc for a given Value must use values of the same
+// concrete type. SwapIfFunc with an inconsistent type panics, as does
+// SwapIfFunc with a nil interface value for new.
+func (v *Value[T]) SwapIfFunc(new T, shouldSwap func(old T) bool) (old T, swapped bool) {
+	var newIface any = new
+	if newIface == nil {
+		panic("sync/atomic: swap if func of nil value into Value")
+	}
+
+	vp := (*efaceWords)(unsafe.Pointer(v))
+	np := (*efaceWords)(unsafe.Pointer(&newIface))
+	for {
+		typ := atomic.LoadPointer(&vp.typ)
+		if typ == nil {
+			if !shouldSwap(old) {
+				return old, false
+			}
+
+			// Attempt to start first store.
+			// Disable preemption so that other goroutines can use
+			// active spin wait to wait for completion.
+			runtime_procPin()
+			if !atomic.CompareAndSwapPointer(&vp.typ, nil, unsafe.Pointer(&firstStoreInProgress)) {
+				runtime_procUnpin()
+				continue
+			}
+
+			// Complete first store.
+			atomic.StorePointer(&vp.data, np.data)
+			atomic.StorePointer(&vp.typ, np.typ)
+			runtime_procUnpin()
+			return old, true
+		}
+		if typ == unsafe.Pointer(&firstStoreInProgress) {
+			// First store in progress. Wait.
+			// Since we disable preemption around the first store,
+			// we can wait with active spinning.
+			continue
+		}
+		if typ != np.typ {
+			panic("sync/atomic: swap if func of inconsistently typed value into Value")
+		}
+
+		data := atomic.LoadPointer(&vp.data)
+		var oldIface any
+		op := (*efaceWords)(unsafe.Pointer(&oldIface))
+		op.typ, op.data = typ, data
+		old = oldIface.(T)
+		if !shouldSwap(old) {
+			return old, false
+		}
+		if atomic.CompareAndSwapPointer(&vp.data, data, np.data) {
+			return old, true
+		}
+	}
+}
+
 // CompareAndSwap executes the compare-and-swap operation for the [Value].
 //
 // All calls to CompareAndSwap for a given Value must use values of the same

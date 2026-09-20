@@ -14,14 +14,16 @@ const (
 func TestValueLoadEmpty(t *testing.T) {
 	var v atom.Value[int]
 
-	if got := v.Load(); got != 0 {
+	got := v.Load()
+	if got != 0 {
 		t.Fatalf("Load empty = %v, want 0", got)
 	}
 
 	var s atom.Value[string]
 
-	if got := s.Load(); got != "" {
-		t.Fatalf("Load empty = %q, want \"\"", got)
+	gotString := s.Load()
+	if gotString != "" {
+		t.Fatalf("Load empty = %q, want \"\"", gotString)
 	}
 }
 
@@ -30,13 +32,15 @@ func TestValueStoreLoad(t *testing.T) {
 
 	v.Store(42)
 
-	if got := v.Load(); got != 42 {
+	got := v.Load()
+	if got != 42 {
 		t.Fatalf("Load = %v, want 42", got)
 	}
 
 	v.Store(7)
 
-	if got := v.Load(); got != 7 {
+	got = v.Load()
+	if got != 7 {
 		t.Fatalf("Load = %v, want 7", got)
 	}
 }
@@ -44,49 +48,168 @@ func TestValueStoreLoad(t *testing.T) {
 func TestValueSwap(t *testing.T) {
 	var v atom.Value[string]
 
-	if got := v.Swap("a"); got != "" {
+	got := v.Swap("a")
+	if got != "" {
 		t.Fatalf("Swap empty = %q, want \"\"", got)
 	}
 
-	if got := v.Load(); got != "a" {
+	got = v.Load()
+	if got != "a" {
 		t.Fatalf("Load = %q, want \"a\"", got)
 	}
 
-	if got := v.Swap("b"); got != "a" {
+	got = v.Swap("b")
+	if got != "a" {
 		t.Fatalf("Swap = %q, want \"a\"", got)
 	}
 
-	if got := v.Load(); got != "b" {
+	got = v.Load()
+	if got != "b" {
 		t.Fatalf("Load = %q, want \"b\"", got)
+	}
+}
+
+func TestValueSwapIfFunc(t *testing.T) {
+	var value atom.Value[int]
+
+	old, swapped := value.SwapIfFunc(1, func(old int) bool {
+		return old == 1
+	})
+
+	if old != 0 || swapped {
+		t.Fatalf("SwapIfFunc on empty = (%v, %v), want (0, false)", old, swapped)
+	}
+
+	old, swapped = value.SwapIfFunc(1, func(old int) bool {
+		return old == 0
+	})
+
+	if old != 0 || !swapped {
+		t.Fatalf("SwapIfFunc on empty = (%v, %v), want (0, true)", old, swapped)
+	}
+
+	old, swapped = value.SwapIfFunc(2, func(old int) bool {
+		return old == 0
+	})
+
+	if old != 1 || swapped {
+		t.Fatalf("SwapIfFunc false = (%v, %v), want (1, false)", old, swapped)
+	}
+
+	old, swapped = value.SwapIfFunc(2, func(old int) bool {
+		return old == 1
+	})
+
+	if old != 1 || !swapped {
+		t.Fatalf("SwapIfFunc true = (%v, %v), want (1, true)", old, swapped)
+	}
+
+	got := value.Load()
+	if got != 2 {
+		t.Fatalf("Load = %v, want 2", got)
+	}
+}
+
+func TestValueSwapIfFuncNonComparable(t *testing.T) {
+	var value atom.Value[[]int]
+
+	value.Store([]int{1, 2})
+
+	old, swapped := value.SwapIfFunc([]int{3, 4}, func(old []int) bool {
+		return len(old) == 2 && old[0] == 1 && old[1] == 2
+	})
+
+	if len(old) != 2 || old[0] != 1 || old[1] != 2 || !swapped {
+		t.Fatalf("SwapIfFunc = (%v, %v), want ([1 2], true)", old, swapped)
+	}
+
+	got := value.Load()
+	if len(got) != 2 || got[0] != 3 || got[1] != 4 {
+		t.Fatalf("Load = %v, want [3 4]", got)
+	}
+}
+
+func TestValueSwapIfFuncInconsistentTypePanics(t *testing.T) {
+	var value atom.Value[any]
+
+	value.Store(1)
+
+	defer func() {
+		if recover() == nil {
+			t.Fatal("SwapIfFunc of inconsistent type did not panic")
+		}
+	}()
+
+	value.SwapIfFunc("x", func(any) bool {
+		t.Fatal("predicate called for an inconsistent type")
+
+		return true
+	})
+}
+
+func TestValueSwapIfFuncConcurrent(t *testing.T) {
+	var value atom.Value[int]
+
+	value.Store(0)
+
+	results := make(chan bool, testGoroutines)
+	goroutines := [testGoroutines]struct{}{}
+
+	for goroutine := range goroutines {
+		go func(candidate int) {
+			_, swapped := value.SwapIfFunc(candidate, func(old int) bool {
+				return old == 0
+			})
+
+			results <- swapped
+		}(goroutine + 1)
+	}
+
+	swaps := 0
+
+	for range goroutines {
+		if <-results {
+			swaps++
+		}
+	}
+
+	if swaps != 1 {
+		t.Fatalf("successful swaps = %v, want 1", swaps)
 	}
 }
 
 func TestValueCompareAndSwap(t *testing.T) {
 	var v atom.Value[int]
 
-	if v.CompareAndSwap(0, 1) {
+	swapped := v.CompareAndSwap(0, 1)
+	if swapped {
 		t.Fatal("CAS on empty with old=0 succeeded, want false")
 	}
 
-	if got := v.Load(); got != 0 {
+	got := v.Load()
+	if got != 0 {
 		t.Fatalf("Load = %v, want 0", got)
 	}
 
 	v.Store(1)
 
-	if !v.CompareAndSwap(1, 2) {
+	swapped = v.CompareAndSwap(1, 2)
+	if !swapped {
 		t.Fatal("CAS(1, 2) failed, want success")
 	}
 
-	if got := v.Load(); got != 2 {
+	got = v.Load()
+	if got != 2 {
 		t.Fatalf("Load = %v, want 2", got)
 	}
 
-	if v.CompareAndSwap(1, 3) {
+	swapped = v.CompareAndSwap(1, 3)
+	if swapped {
 		t.Fatal("CAS(1, 3) succeeded, want false")
 	}
 
-	if got := v.Load(); got != 2 {
+	got = v.Load()
+	if got != 2 {
 		t.Fatalf("Load = %v, want 2", got)
 	}
 }
@@ -94,15 +217,18 @@ func TestValueCompareAndSwap(t *testing.T) {
 func TestValueCompareAndSwapInterfaceNil(t *testing.T) {
 	var v atom.Value[any]
 
-	if !v.CompareAndSwap(nil, "x") {
+	swapped := v.CompareAndSwap(nil, "x")
+	if !swapped {
 		t.Fatal("CAS(nil, \"x\") on empty failed, want success")
 	}
 
-	if got := v.Load(); got != "x" {
+	got := v.Load()
+	if got != "x" {
 		t.Fatalf("Load = %v, want \"x\"", got)
 	}
 
-	if v.CompareAndSwap(nil, "y") {
+	swapped = v.CompareAndSwap(nil, "y")
+	if swapped {
 		t.Fatal("CAS(nil, \"y\") after store succeeded, want false")
 	}
 }
@@ -161,22 +287,34 @@ func TestValueInconsistentTypePanics(t *testing.T) {
 
 func TestValueConcurrent(t *testing.T) {
 	var v atom.Value[int]
+
 	v.Store(0)
 
 	done := make(chan struct{}, testGoroutines)
-	for g := 0; g < testGoroutines; g++ {
+
+	var (
+		goroutines [testGoroutines]struct{}
+		operations [testOps]struct{}
+	)
+
+	for goroutine := range goroutines {
 		go func(id int) {
-			defer func() { done <- struct{}{} }()
-			for i := 0; i < testOps; i++ {
+			defer func() {
+				done <- struct{}{}
+			}()
+
+			for range operations {
 				v.Store(id)
 				_ = v.Load()
 				_ = v.Swap(id)
 				v.CompareAndSwap(id, id+1)
 			}
-		}(g)
+		}(goroutine)
 	}
-	for g := 0; g < testGoroutines; g++ {
+
+	for range goroutines {
 		<-done
 	}
+
 	_ = v.Load()
 }
