@@ -1,0 +1,11 @@
+# label atom_ns atom_min atom_max stdlib_ns stdlib_min stdlib_max atom_B stdlib_B atom_allocs stdlib_allocs ratio
+"PointerCASChanged"	7.127	6.792	7.684	7.091	6.708	7.286	0	0	0	0	1.00508
+"PointerCASRejected"	2.784	2.709	3.534	3.31	2.884	3.367	0	0	0	0	0.841088
+"PointerLoad"	0.8366	0.7626	1.077	0.8665	0.8054	1.285	0	0	0	0	0.965493
+"PointerStore"	5.662	5.556	6.623	5.561	5.486	6.449	0	0	0	0	1.01816
+"PointerSwap"	6.117	5.673	6.307	6.05	5.677	6.091	0	0	0	0	1.01107
+"StructLoad"	0.8364	0.795	1.055	1.014	0.8928	1.212	0	0	0	0	0.824852
+"StructStore"	14.04	11.91	19.89	16.41	12.7	21.78	16	16	1	1	0.855576
+"StructSwap"	19.73	15.68	21.95	19.73	15.69	23.98	16	16	1	1	1
+"SwapIfFuncChanged"	7.055	6.69	7.923	8.909	8.242	9.123	0	0	0	0	0.791896
+"SwapIfFuncRejected"	3.233	2.538	3.317	3.283	2.583	3.798	0	0	0	0	0.98477

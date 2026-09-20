@@ -25,9 +25,9 @@ TEXT ·SwapIfLessUint64(SB),NOSPLIT,$16-41
 	Get	R0
 	I64Eqz
 	If
-		// Load64 raises a recoverable nil-pointer panic.
+		// The stdlib load raises a recoverable nil-pointer panic.
 		MOVD	R0, 0(SP)
-		CALLNORESUME ·Load64(SB)
+		CALLNORESUME sync∕atomic·LoadUint64(SB)
 	End
 	MOVD	new+8(FP), R1
 	MOVD	mask+16(FP), R2
