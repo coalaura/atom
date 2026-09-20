@@ -1,11 +1,11 @@
-# label atom_ns atom_min atom_max stdlib_ns stdlib_min stdlib_max atom_B stdlib_B atom_allocs stdlib_allocs ratio
-"Int32Add"	4.961	4.853	5.016	4.366	3.92	4.392	0	0	0	0	1.13628
-"Int32Load"	2.463	2.022	2.529	0.3591	0.3228	0.361	0	0	0	0	6.85881
-"Uint64Add"	4.947	4.905	5.014	4.306	4.128	4.363	0	0	0	0	1.14886
-"Uint64And"	4.817	4.799	4.879	4.366	4.2	4.376	0	0	0	0	1.1033
-"Uint64CASChanged"	4.99	4.765	5.039	4.4	4.143	4.448	0	0	0	0	1.13409
-"Uint64CASRejected"	5.022	4.904	5.06	4.34	4.166	4.356	0	0	0	0	1.15714
-"Uint64Load"	2.725	2.696	2.804	0.4233	0.3992	0.4606	0	0	0	0	6.43751
-"Uint64Or"	4.776	4.743	4.869	4.326	4.26	4.371	0	0	0	0	1.10402
-"Uint64Store"	4.759	4.615	4.898	4.142	4.105	4.181	0	0	0	0	1.14896
-"Uint64Swap"	4.808	4.616	4.843	4.518	4.478	4.562	0	0	0	0	1.06419
+# case	atom_ns	stdlib_ns	atom_B	stdlib_B	atom_allocs	stdlib_allocs
+Int32Add	4.298	4.117	0	0	0	0
+Int32Load	0.3130	0.3244	0	0	0	0
+Uint64Add	4.206	4.161	0	0	0	0
+Uint64And	4.118	4.232	0	0	0	0
+Uint64CASChanged	4.287	4.518	0	0	0	0
+Uint64CASRejected	4.274	4.254	0	0	0	0
+Uint64Load	0.3098	0.3112	0	0	0	0
+Uint64Or	4.204	4.131	0	0	0	0
+Uint64Store	3.972	3.990	0	0	0	0
+Uint64Swap	4.483	4.462	0	0	0	0

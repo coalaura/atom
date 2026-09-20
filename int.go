@@ -11,48 +11,70 @@ import "sync/atomic"
 //
 // Int must not be copied after first use.
 type Int[T ~int | ~int8 | ~int16 | ~int32 | ~int64 | ~uint | ~uint8 | ~uint16 | ~uint32 | ~uint64 | ~uintptr] struct {
-	_ noCopy
-	_ align64
-	v uint64
+	v atomic.Uint64
 }
 
 // Load atomically loads and returns the value stored in x.
-func (x *Int[T]) Load() T { return T(atomic.LoadUint64(&x.v)) }
+func (x *Int[T]) Load() T { return T(x.v.Load()) }
 
 // Store atomically stores val into x.
-func (x *Int[T]) Store(val T) { atomic.StoreUint64(&x.v, uint64(val)) }
+func (x *Int[T]) Store(val T) { x.v.Store(uint64(val)) }
 
 // Swap atomically stores new into x and returns the previous value.
-func (x *Int[T]) Swap(new T) (old T) { return T(atomic.SwapUint64(&x.v, uint64(new))) }
+func (x *Int[T]) Swap(new T) (old T) { return T(x.v.Swap(uint64(new))) }
+
+// SwapIfLess atomically stores new into x if new is less than the current value.
+// It returns the previous value and whether the swap occurred.
+// The comparison uses the signedness and width of T. Equal values are not swapped.
+func (x *Int[T]) SwapIfLess(new T) (old T, swapped bool) {
+	for {
+		oldBits := x.v.Load()
+		old = T(oldBits)
+
+		if new >= old {
+			return old, false
+		}
+
+		// Add may leave overflow bits above T's width; CAS must compare the full stored value.
+		swapped = x.v.CompareAndSwap(oldBits, uint64(new))
+		if swapped {
+			return old, true
+		}
+	}
+}
+
+// SwapIfGreater atomically stores new into x if new is greater than the current value.
+// It returns the previous value and whether the swap occurred.
+// The comparison uses the signedness and width of T. Equal values are not swapped.
+func (x *Int[T]) SwapIfGreater(new T) (old T, swapped bool) {
+	for {
+		oldBits := x.v.Load()
+		old = T(oldBits)
+
+		if new <= old {
+			return old, false
+		}
+
+		// Compare the original bits, not the potentially narrowed old value.
+		swapped = x.v.CompareAndSwap(oldBits, uint64(new))
+		if swapped {
+			return old, true
+		}
+	}
+}
 
 // CompareAndSwap executes the compare-and-swap operation for x.
 func (x *Int[T]) CompareAndSwap(old, new T) (swapped bool) {
-	return atomic.CompareAndSwapUint64(&x.v, uint64(old), uint64(new))
+	return x.v.CompareAndSwap(uint64(old), uint64(new))
 }
 
 // Add atomically adds delta to x and returns the new value.
-func (x *Int[T]) Add(delta T) (new T) { return T(atomic.AddUint64(&x.v, uint64(delta))) }
+func (x *Int[T]) Add(delta T) (new T) { return T(x.v.Add(uint64(delta))) }
 
 // And atomically performs a bitwise AND operation on x using the bitmask
 // provided as mask and returns the old value.
-func (x *Int[T]) And(mask T) (old T) { return T(atomic.AndUint64(&x.v, uint64(mask))) }
+func (x *Int[T]) And(mask T) (old T) { return T(x.v.And(uint64(mask))) }
 
 // Or atomically performs a bitwise OR operation on x using the bitmask
 // provided as mask and returns the old value.
-func (x *Int[T]) Or(mask T) (old T) { return T(atomic.OrUint64(&x.v, uint64(mask))) }
-
-// noCopy may be added to structs which must not be copied
-// after the first use.
-//
-// See https://golang.org/issues/8005#issuecomment-190753527
-// for details.
-//
-// Note that it must not be embedded, due to the Lock and Unlock methods.
-type noCopy struct{}
-
-// Lock is a no-op used by -copylocks checker from `go vet`.
-func (*noCopy) Lock()   {}
-func (*noCopy) Unlock() {}
-
-// align64 may be added to structs that must be 64-bit aligned.
-type align64 [0]atomic.Uint64
+func (x *Int[T]) Or(mask T) (old T) { return T(x.v.Or(uint64(mask))) }

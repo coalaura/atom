@@ -1,9 +1,0 @@
-# label atom_ns atom_min atom_max stdlib_ns stdlib_min stdlib_max atom_B stdlib_B atom_allocs stdlib_allocs ratio
-"GreaterEqual"	1.52	1.266	1.65	0.8421	0.7203	0.9147	0	0	0	0	1.80501
-"GreaterRejected"	1.043	1.041	1.14	0.4915	0.4886	0.5066	0	0	0	0	2.12208
-"Int64GreaterChanged"	4.809	4.722	5.201	4.106	4.072	4.288	0	0	0	0	1.17121
-"Int64LessChanged"	4.726	4.674	4.884	3.998	3.92	4.313	0	0	0	0	1.18209
-"LessEqual"	1.519	1.327	1.627	0.9562	0.7564	1.098	0	0	0	0	1.58858
-"LessRejected"	1.044	1.042	1.137	0.5489	0.5445	0.5936	0	0	0	0	1.90199
-"Uint64GreaterChanged"	4.763	4.724	5.098	4.051	3.936	4.352	0	0	0	0	1.17576
-"Uint64LessChanged"	4.774	4.709	4.87	4.08	4.002	4.157	0	0	0	0	1.1701

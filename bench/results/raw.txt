@@ -1,524 +1,113 @@
-# recorded: 2026-09-20T18:03:24Z
-# go version go1.27.1 windows/amd64
-# {
-# 	"CGO_ENABLED": "1",
-# 	"GOAMD64": "v1",
-# 	"GOARCH": "amd64",
-# 	"GOARM": "",
-# 	"GOARM64": "",
-# 	"GOEXPERIMENT": "",
-# 	"GOFLAGS": "",
-# 	"GOOS": "windows"
-# }
-# GODEBUG="" GOMAXPROCS=""
-# sample 1: go test ./bench -run=^$ -bench=^Benchmark(Uint64|Int32|Conditional|Value) -benchmem -benchtime=200ms -count=1 -cpu=1 -timeout=30m
+# Recorded: 2026-09-20T20:27:03Z
+go version go1.27.1 windows/amd64
+{
+	"CGO_ENABLED": "1",
+	"GOAMD64": "v1",
+	"GOARCH": "amd64",
+	"GOARM": "",
+	"GOARM64": "",
+	"GOEXPERIMENT": "",
+	"GOFLAGS": "",
+	"GOOS": "windows"
+}
+# benchtime=500ms cpu=1,2,4,8 GODEBUG= GOMAXPROCS=
 goos: windows
 goarch: amd64
 pkg: github.com/coalaura/atom/bench
 cpu: AMD Ryzen 9 9950X3D 16-Core Processor          
-BenchmarkConditionalInt64LessChanged/Atom         	48193738	         5.065 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalInt64LessChanged/Stdlib       	60606060	         3.988 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalInt64GreaterChanged/Atom      	47475866	         5.134 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalInt64GreaterChanged/Stdlib    	59830976	         4.034 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalUint64LessChanged/Atom        	46615518	         5.166 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalUint64LessChanged/Stdlib      	58493784	         4.019 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalUint64GreaterChanged/Atom     	47260839	         5.157 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalUint64GreaterChanged/Stdlib   	58930412	         4.046 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalLessRejected/Atom             	133618310	         1.797 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalLessRejected/Stdlib           	493102725	         0.4801 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalGreaterRejected/Atom          	127642736	         1.881 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalGreaterRejected/Stdlib        	441240547	         0.5506 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalLessEqual/Atom                	100000000	         2.348 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalLessEqual/Stdlib              	262474941	         0.9750 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalGreaterEqual/Atom             	77977776	         2.860 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalGreaterEqual/Stdlib           	213118509	         1.065 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Load/Atom                          	89186175	         2.696 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Load/Stdlib                        	507304122	         0.4591 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Store/Atom                         	53740567	         4.759 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Store/Stdlib                       	58287795	         4.169 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Swap/Atom                          	49188391	         4.843 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Swap/Stdlib                        	52184122	         4.518 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64CASChanged/Atom                    	47311149	         5.039 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64CASChanged/Stdlib                  	52632732	         4.448 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64CASRejected/Atom                   	49442738	         5.023 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64CASRejected/Stdlib                 	57781201	         4.356 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Add/Atom                           	47441143	         4.995 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Add/Stdlib                         	53348744	         4.312 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64And/Atom                           	50687448	         4.846 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64And/Stdlib                         	56089180	         4.366 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Or/Atom                            	48375392	         4.827 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Or/Stdlib                          	52863435	         4.371 ns/op	       0 B/op	       0 allocs/op
-BenchmarkInt32Load/Atom                           	81196291	         2.500 ns/op	       0 B/op	       0 allocs/op
-BenchmarkInt32Load/Stdlib                         	661725780	         0.3591 ns/op	       0 B/op	       0 allocs/op
-BenchmarkInt32Add/Atom                            	48425172	         4.975 ns/op	       0 B/op	       0 allocs/op
-BenchmarkInt32Add/Stdlib                          	52385733	         4.375 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerLoad/Atom                    	255841990	         0.9226 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerLoad/Stdlib                  	163314522	         1.412 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerStore/Atom                   	42313116	         5.830 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerStore/Stdlib                 	40477635	         5.837 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerSwap/Atom                    	37623451	         6.243 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerSwap/Stdlib                  	40014672	         6.140 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerCASChanged/Atom              	32154771	         7.222 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerCASChanged/Stdlib            	37200650	         6.960 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerCASRejected/Atom             	67315513	         3.322 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerCASRejected/Stdlib           	95461596	         3.392 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValueStructLoad/Atom                     	225611194	         1.042 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValueStructLoad/Stdlib                   	194753186	         1.262 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValueStructStore/Atom                    	13368387	        16.10 ns/op	      16 B/op	       1 allocs/op
-BenchmarkValueStructStore/Stdlib                  	16553778	        15.44 ns/op	      16 B/op	       1 allocs/op
-BenchmarkValueStructSwap/Atom                     	14430882	        16.36 ns/op	      16 B/op	       1 allocs/op
-BenchmarkValueStructSwap/Stdlib                   	15831552	        15.83 ns/op	      16 B/op	       1 allocs/op
-BenchmarkValueSwapIfFuncChanged/Atom              	33948171	         7.239 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValueSwapIfFuncChanged/Stdlib            	25696480	         8.864 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValueSwapIfFuncRejected/Atom             	84659403	         2.861 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValueSwapIfFuncRejected/Stdlib           	100000000	         2.525 ns/op	       0 B/op	       0 allocs/op
+BenchmarkConditionalInt64LessChanged/Atom         	142044411	         4.256 ns/op	       0 B/op	       0 allocs/op
+BenchmarkConditionalInt64LessChanged/Stdlib       	140337482	         4.305 ns/op	       0 B/op	       0 allocs/op
+BenchmarkConditionalInt64GreaterChanged/Atom      	136162239	         4.399 ns/op	       0 B/op	       0 allocs/op
+BenchmarkConditionalInt64GreaterChanged/Stdlib    	139552310	         4.311 ns/op	       0 B/op	       0 allocs/op
+BenchmarkConditionalUint64LessChanged/Atom        	138729220	         4.352 ns/op	       0 B/op	       0 allocs/op
+BenchmarkConditionalUint64LessChanged/Stdlib      	133290916	         4.507 ns/op	       0 B/op	       0 allocs/op
+BenchmarkConditionalUint64GreaterChanged/Atom     	133241602	         4.504 ns/op	       0 B/op	       0 allocs/op
+BenchmarkConditionalUint64GreaterChanged/Stdlib   	136081668	         4.398 ns/op	       0 B/op	       0 allocs/op
+BenchmarkConditionalLessRejected/Atom             	663725624	         1.009 ns/op	       0 B/op	       0 allocs/op
+BenchmarkConditionalLessRejected/Stdlib           	1000000000	         0.6846 ns/op	       0 B/op	       0 allocs/op
+BenchmarkConditionalGreaterRejected/Atom          	878871060	         0.8146 ns/op	       0 B/op	       0 allocs/op
+BenchmarkConditionalGreaterRejected/Stdlib        	826026440	         0.7248 ns/op	       0 B/op	       0 allocs/op
+BenchmarkConditionalLessEqual/Atom                	670110288	         0.9438 ns/op	       0 B/op	       0 allocs/op
+BenchmarkConditionalLessEqual/Stdlib              	1000000000	         0.6479 ns/op	       0 B/op	       0 allocs/op
+BenchmarkConditionalGreaterEqual/Atom             	673442998	         0.9848 ns/op	       0 B/op	       0 allocs/op
+BenchmarkConditionalGreaterEqual/Stdlib           	949887518	         0.6783 ns/op	       0 B/op	       0 allocs/op
+BenchmarkUint64Load/Atom                          	1000000000	         0.3098 ns/op	       0 B/op	       0 allocs/op
+BenchmarkUint64Load/Stdlib                        	1000000000	         0.3112 ns/op	       0 B/op	       0 allocs/op
+BenchmarkUint64Store/Atom                         	150706776	         3.972 ns/op	       0 B/op	       0 allocs/op
+BenchmarkUint64Store/Stdlib                       	151769058	         3.990 ns/op	       0 B/op	       0 allocs/op
+BenchmarkUint64Swap/Atom                          	133997394	         4.483 ns/op	       0 B/op	       0 allocs/op
+BenchmarkUint64Swap/Stdlib                        	133709263	         4.462 ns/op	       0 B/op	       0 allocs/op
+BenchmarkUint64CASChanged/Atom                    	142574336	         4.287 ns/op	       0 B/op	       0 allocs/op
+BenchmarkUint64CASChanged/Stdlib                  	131270174	         4.518 ns/op	       0 B/op	       0 allocs/op
+BenchmarkUint64CASRejected/Atom                   	140054682	         4.274 ns/op	       0 B/op	       0 allocs/op
+BenchmarkUint64CASRejected/Stdlib                 	143243626	         4.254 ns/op	       0 B/op	       0 allocs/op
+BenchmarkUint64Add/Atom                           	142710388	         4.206 ns/op	       0 B/op	       0 allocs/op
+BenchmarkUint64Add/Stdlib                         	144796694	         4.161 ns/op	       0 B/op	       0 allocs/op
+BenchmarkUint64And/Atom                           	143465572	         4.118 ns/op	       0 B/op	       0 allocs/op
+BenchmarkUint64And/Stdlib                         	141651954	         4.232 ns/op	       0 B/op	       0 allocs/op
+BenchmarkUint64Or/Atom                            	144890298	         4.204 ns/op	       0 B/op	       0 allocs/op
+BenchmarkUint64Or/Stdlib                          	143432546	         4.131 ns/op	       0 B/op	       0 allocs/op
+BenchmarkInt32Load/Atom                           	1000000000	         0.3130 ns/op	       0 B/op	       0 allocs/op
+BenchmarkInt32Load/Stdlib                         	1000000000	         0.3244 ns/op	       0 B/op	       0 allocs/op
+BenchmarkInt32Add/Atom                            	142213996	         4.298 ns/op	       0 B/op	       0 allocs/op
+BenchmarkInt32Add/Stdlib                          	147796866	         4.117 ns/op	       0 B/op	       0 allocs/op
+BenchmarkValuePointerLoad/Atom                    	897733222	         0.7520 ns/op	       0 B/op	       0 allocs/op
+BenchmarkValuePointerLoad/Stdlib                  	549103587	         1.054 ns/op	       0 B/op	       0 allocs/op
+BenchmarkValuePointerStore/Atom                   	99387112	         5.547 ns/op	       0 B/op	       0 allocs/op
+BenchmarkValuePointerStore/Stdlib                 	100000000	         5.598 ns/op	       0 B/op	       0 allocs/op
+BenchmarkValuePointerSwap/Atom                    	100000000	         5.890 ns/op	       0 B/op	       0 allocs/op
+BenchmarkValuePointerSwap/Stdlib                  	96735187	         5.794 ns/op	       0 B/op	       0 allocs/op
+BenchmarkValuePointerCASChanged/Atom              	98586920	         7.211 ns/op	       0 B/op	       0 allocs/op
+BenchmarkValuePointerCASChanged/Stdlib            	81528385	         6.888 ns/op	       0 B/op	       0 allocs/op
+BenchmarkValuePointerCASRejected/Atom             	210438079	         2.718 ns/op	       0 B/op	       0 allocs/op
+BenchmarkValuePointerCASRejected/Stdlib           	199077144	         2.920 ns/op	       0 B/op	       0 allocs/op
+BenchmarkValueStructLoad/Atom                     	919242972	         0.8244 ns/op	       0 B/op	       0 allocs/op
+BenchmarkValueStructLoad/Stdlib                   	511999125	         1.056 ns/op	       0 B/op	       0 allocs/op
+BenchmarkValueStructStore/Atom                    	44271294	        13.61 ns/op	      16 B/op	       1 allocs/op
+BenchmarkValueStructStore/Stdlib                  	45590034	        13.24 ns/op	      16 B/op	       1 allocs/op
+BenchmarkValueStructSwap/Atom                     	49848790	        16.47 ns/op	      16 B/op	       1 allocs/op
+BenchmarkValueStructSwap/Stdlib                   	28690974	        18.82 ns/op	      16 B/op	       1 allocs/op
+BenchmarkValueSwapIfFuncChanged/Atom              	87781741	         6.872 ns/op	       0 B/op	       0 allocs/op
+BenchmarkValueSwapIfFuncChanged/Stdlib            	79033681	         8.695 ns/op	       0 B/op	       0 allocs/op
+BenchmarkValueSwapIfFuncRejected/Atom             	205713062	         2.942 ns/op	       0 B/op	       0 allocs/op
+BenchmarkValueSwapIfFuncRejected/Stdlib           	179133566	         3.329 ns/op	       0 B/op	       0 allocs/op
 PASS
-ok  	github.com/coalaura/atom/bench	13.614s
-# sample 1: go test ./bench -run=^$ -bench=^BenchmarkParallel -benchmem -benchtime=200ms -count=1 -cpu=1,2,4,8 -timeout=30m
+ok  	github.com/coalaura/atom/bench	33.409s
 goos: windows
 goarch: amd64
 pkg: github.com/coalaura/atom/bench
 cpu: AMD Ryzen 9 9950X3D 16-Core Processor          
-BenchmarkParallelLoad/Atom           	137498703	         1.743 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelLoad/Atom-2         	278168630	         0.8541 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelLoad/Atom-4         	559087382	         0.4334 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelLoad/Atom-8         	1000000000	         0.2371 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelLoad/Stdlib         	1000000000	         0.2283 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelLoad/Stdlib-2       	1000000000	         0.1096 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelLoad/Stdlib-4       	1000000000	         0.05550 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelLoad/Stdlib-8       	1000000000	         0.04015 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelAdd/Atom            	56188981	         4.290 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelAdd/Atom-2          	27523566	        10.60 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelAdd/Atom-4          	20228071	        12.39 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelAdd/Atom-8          	16480120	        14.94 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelAdd/Stdlib          	66517003	         3.929 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelAdd/Stdlib-2        	41578600	         6.231 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelAdd/Stdlib-4        	35142178	         7.455 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelAdd/Stdlib-8        	25100401	         9.192 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelCASIncrement/Atom   	44653654	         5.758 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelCASIncrement/Atom-2 	14399712	        17.93 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelCASIncrement/Atom-4 	 9755700	        27.05 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelCASIncrement/Atom-8 	 7976760	        32.55 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelCASIncrement/Stdlib           	56917894	         4.296 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelCASIncrement/Stdlib-2         	20786239	        11.20 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelCASIncrement/Stdlib-4         	14278320	        18.16 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelCASIncrement/Stdlib-8         	 9346303	        26.24 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelConditionalPair/Atom          	21080923	        11.17 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
-BenchmarkParallelConditionalPair/Atom-2        	11632189	        21.51 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
-BenchmarkParallelConditionalPair/Atom-4        	 8706408	        26.43 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
-BenchmarkParallelConditionalPair/Atom-8        	 8469282	        28.58 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
-BenchmarkParallelConditionalPair/Stdlib        	29694150	         8.530 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
-BenchmarkParallelConditionalPair/Stdlib-2      	14527316	        21.16 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
-BenchmarkParallelConditionalPair/Stdlib-4      	 8706376	        26.11 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
-BenchmarkParallelConditionalPair/Stdlib-8      	 8901250	        27.67 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
+BenchmarkParallelLoad/Atom           	1000000000	         0.2188 ns/op	       0 B/op	       0 allocs/op
+BenchmarkParallelLoad/Atom-2         	1000000000	         0.1060 ns/op	       0 B/op	       0 allocs/op
+BenchmarkParallelLoad/Atom-4         	1000000000	         0.05137 ns/op	       0 B/op	       0 allocs/op
+BenchmarkParallelLoad/Atom-8         	1000000000	         0.02631 ns/op	       0 B/op	       0 allocs/op
+BenchmarkParallelLoad/Stdlib         	1000000000	         0.2061 ns/op	       0 B/op	       0 allocs/op
+BenchmarkParallelLoad/Stdlib-2       	1000000000	         0.1034 ns/op	       0 B/op	       0 allocs/op
+BenchmarkParallelLoad/Stdlib-4       	1000000000	         0.05126 ns/op	       0 B/op	       0 allocs/op
+BenchmarkParallelLoad/Stdlib-8       	1000000000	         0.02639 ns/op	       0 B/op	       0 allocs/op
+BenchmarkParallelAdd/Atom            	153812078	         3.996 ns/op	       0 B/op	       0 allocs/op
+BenchmarkParallelAdd/Atom-2          	100000000	         5.297 ns/op	       0 B/op	       0 allocs/op
+BenchmarkParallelAdd/Atom-4          	100000000	         5.783 ns/op	       0 B/op	       0 allocs/op
+BenchmarkParallelAdd/Atom-8          	71889002	         8.746 ns/op	       0 B/op	       0 allocs/op
+BenchmarkParallelAdd/Stdlib          	147303932	         4.055 ns/op	       0 B/op	       0 allocs/op
+BenchmarkParallelAdd/Stdlib-2        	100000000	         5.682 ns/op	       0 B/op	       0 allocs/op
+BenchmarkParallelAdd/Stdlib-4        	93322755	         6.848 ns/op	       0 B/op	       0 allocs/op
+BenchmarkParallelAdd/Stdlib-8        	84656084	         7.139 ns/op	       0 B/op	       0 allocs/op
+BenchmarkParallelCASIncrement/Atom   	143310276	         4.258 ns/op	       0 B/op	       0 allocs/op
+BenchmarkParallelCASIncrement/Atom-2 	46022857	        11.66 ns/op	       0 B/op	       0 allocs/op
+BenchmarkParallelCASIncrement/Atom-4 	35279797	        17.32 ns/op	       0 B/op	       0 allocs/op
+BenchmarkParallelCASIncrement/Atom-8 	25316775	        23.06 ns/op	       0 B/op	       0 allocs/op
+BenchmarkParallelCASIncrement/Stdlib           	147005713	         4.138 ns/op	       0 B/op	       0 allocs/op
+BenchmarkParallelCASIncrement/Stdlib-2         	58998789	        10.34 ns/op	       0 B/op	       0 allocs/op
+BenchmarkParallelCASIncrement/Stdlib-4         	35842293	        18.48 ns/op	       0 B/op	       0 allocs/op
+BenchmarkParallelCASIncrement/Stdlib-8         	24587040	        23.59 ns/op	       0 B/op	       0 allocs/op
+BenchmarkParallelConditionalPair/Atom          	70945466	         8.895 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
+BenchmarkParallelConditionalPair/Atom-2        	34080408	        19.57 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
+BenchmarkParallelConditionalPair/Atom-4        	22813947	        26.32 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
+BenchmarkParallelConditionalPair/Atom-8        	22085455	        27.21 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
+BenchmarkParallelConditionalPair/Stdlib        	80451601	         8.118 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
+BenchmarkParallelConditionalPair/Stdlib-2      	27212487	        20.05 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
+BenchmarkParallelConditionalPair/Stdlib-4      	21941292	        26.76 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
+BenchmarkParallelConditionalPair/Stdlib-8      	22253376	        27.44 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
 PASS
-ok  	github.com/coalaura/atom/bench	8.365s
-# sample 2: go test ./bench -run=^$ -bench=^Benchmark(Uint64|Int32|Conditional|Value) -benchmem -benchtime=200ms -count=1 -cpu=1 -timeout=30m
-goos: windows
-goarch: amd64
-pkg: github.com/coalaura/atom/bench
-cpu: AMD Ryzen 9 9950X3D 16-Core Processor          
-BenchmarkConditionalInt64LessChanged/Atom         	47439267	         5.176 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalInt64LessChanged/Stdlib       	60003000	         4.023 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalInt64GreaterChanged/Atom      	46779978	         5.086 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalInt64GreaterChanged/Stdlib    	60531160	         4.065 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalUint64LessChanged/Atom        	46531466	         5.124 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalUint64LessChanged/Stdlib      	60500642	         4.044 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalUint64GreaterChanged/Atom     	47650246	         5.164 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalUint64GreaterChanged/Stdlib   	60645878	         4.017 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalLessRejected/Atom             	137878101	         1.752 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalLessRejected/Stdlib           	508761292	         0.4758 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalGreaterRejected/Atom          	124976240	         1.912 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalGreaterRejected/Stdlib        	425172327	         0.5593 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalLessEqual/Atom                	100000000	         2.462 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalLessEqual/Stdlib              	254537664	         0.9987 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalGreaterEqual/Atom             	84132904	         2.801 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalGreaterEqual/Stdlib           	230368300	         1.004 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Load/Atom                          	88688517	         2.753 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Load/Stdlib                        	532337270	         0.4233 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Store/Atom                         	49254006	         4.769 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Store/Stdlib                       	61073364	         4.181 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Swap/Atom                          	48133810	         4.808 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Swap/Stdlib                        	54176071	         4.494 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64CASChanged/Atom                    	47152202	         4.990 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64CASChanged/Stdlib                  	53204460	         4.400 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64CASRejected/Atom                   	46900647	         5.022 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64CASRejected/Stdlib                 	57761732	         4.352 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Add/Atom                           	47656869	         4.947 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Add/Stdlib                         	55747833	         4.306 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64And/Atom                           	48504445	         4.804 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64And/Stdlib                         	53750194	         4.376 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Or/Atom                            	49024614	         4.776 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Or/Stdlib                          	53552301	         4.326 ns/op	       0 B/op	       0 allocs/op
-BenchmarkInt32Load/Atom                           	99038790	         2.463 ns/op	       0 B/op	       0 allocs/op
-BenchmarkInt32Load/Stdlib                         	630204106	         0.3610 ns/op	       0 B/op	       0 allocs/op
-BenchmarkInt32Add/Atom                            	48194706	         4.961 ns/op	       0 B/op	       0 allocs/op
-BenchmarkInt32Add/Stdlib                          	53272957	         4.392 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerLoad/Atom                    	279314979	         0.9090 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerLoad/Stdlib                  	166308295	         1.382 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerStore/Atom                   	40186195	         5.881 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerStore/Stdlib                 	40360554	         5.868 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerSwap/Atom                    	37890150	         5.810 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerSwap/Stdlib                  	38167938	         5.850 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerCASChanged/Atom              	35331526	         6.853 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerCASChanged/Stdlib            	36156556	         6.774 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerCASRejected/Atom             	89016624	         2.784 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerCASRejected/Stdlib           	65228025	         3.277 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValueStructLoad/Atom                     	326017411	         0.8224 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValueStructLoad/Stdlib                   	192217743	         1.059 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValueStructStore/Atom                    	13816766	        14.85 ns/op	      16 B/op	       1 allocs/op
-BenchmarkValueStructStore/Stdlib                  	16412949	        13.87 ns/op	      16 B/op	       1 allocs/op
-BenchmarkValueStructSwap/Atom                     	18993201	        13.48 ns/op	      16 B/op	       1 allocs/op
-BenchmarkValueStructSwap/Stdlib                   	18675339	        12.91 ns/op	      16 B/op	       1 allocs/op
-BenchmarkValueSwapIfFuncChanged/Atom              	37715685	         6.743 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValueSwapIfFuncChanged/Stdlib            	32036734	         8.367 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValueSwapIfFuncRejected/Atom             	100000000	         2.474 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValueSwapIfFuncRejected/Stdlib           	100000000	         2.779 ns/op	       0 B/op	       0 allocs/op
-PASS
-ok  	github.com/coalaura/atom/bench	13.581s
-# sample 2: go test ./bench -run=^$ -bench=^BenchmarkParallel -benchmem -benchtime=200ms -count=1 -cpu=1,2,4,8 -timeout=30m
-goos: windows
-goarch: amd64
-pkg: github.com/coalaura/atom/bench
-cpu: AMD Ryzen 9 9950X3D 16-Core Processor          
-BenchmarkParallelLoad/Atom           	132163320	         1.812 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelLoad/Atom-2         	279940512	         0.8494 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelLoad/Atom-4         	560699191	         0.4314 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelLoad/Atom-8         	1000000000	         0.2286 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelLoad/Stdlib         	1000000000	         0.2081 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelLoad/Stdlib-2       	1000000000	         0.1048 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelLoad/Stdlib-4       	1000000000	         0.05472 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelLoad/Stdlib-8       	1000000000	         0.03897 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelAdd/Atom            	55395267	         4.269 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelAdd/Atom-2          	19400209	        10.65 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelAdd/Atom-4          	20601034	        11.87 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelAdd/Atom-8          	17777776	        13.47 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelAdd/Stdlib          	65478950	         3.658 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelAdd/Stdlib-2        	39102595	         5.600 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelAdd/Stdlib-4        	37603998	         6.970 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelAdd/Stdlib-8        	33524702	         7.380 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelCASIncrement/Atom   	43333032	         5.680 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelCASIncrement/Atom-2 	16088270	        15.96 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelCASIncrement/Atom-4 	 9374779	        26.54 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelCASIncrement/Atom-8 	 7090186	        34.00 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelCASIncrement/Stdlib           	49927189	         4.211 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelCASIncrement/Stdlib-2         	17668364	        13.15 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelCASIncrement/Stdlib-4         	13306792	        19.29 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelCASIncrement/Stdlib-8         	 9955324	        24.89 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelConditionalPair/Atom          	21539151	        10.71 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
-BenchmarkParallelConditionalPair/Atom-2        	10281013	        20.09 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
-BenchmarkParallelConditionalPair/Atom-4        	 9108366	        27.29 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
-BenchmarkParallelConditionalPair/Atom-8        	 8421790	        28.19 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
-BenchmarkParallelConditionalPair/Stdlib        	29037057	         8.119 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
-BenchmarkParallelConditionalPair/Stdlib-2      	12456660	        20.80 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
-BenchmarkParallelConditionalPair/Stdlib-4      	 9314636	        26.73 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
-BenchmarkParallelConditionalPair/Stdlib-8      	 8858768	        27.18 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
-PASS
-ok  	github.com/coalaura/atom/bench	8.025s
-# sample 3: go test ./bench -run=^$ -bench=^Benchmark(Uint64|Int32|Conditional|Value) -benchmem -benchtime=200ms -count=1 -cpu=1 -timeout=30m
-goos: windows
-goarch: amd64
-pkg: github.com/coalaura/atom/bench
-cpu: AMD Ryzen 9 9950X3D 16-Core Processor          
-BenchmarkConditionalInt64LessChanged/Atom         	46825612	         5.065 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalInt64LessChanged/Stdlib       	60791812	         3.991 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalInt64GreaterChanged/Atom      	47843073	         5.156 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalInt64GreaterChanged/Stdlib    	60212247	         4.087 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalUint64LessChanged/Atom        	46302548	         5.252 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalUint64LessChanged/Stdlib      	59138061	         4.115 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalUint64GreaterChanged/Atom     	47258048	         5.226 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalUint64GreaterChanged/Stdlib   	60788733	         4.024 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalLessRejected/Atom             	130405015	         1.836 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalLessRejected/Stdlib           	461443509	         0.5095 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalGreaterRejected/Atom          	121949484	         1.969 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalGreaterRejected/Stdlib        	398173048	         0.5864 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalLessEqual/Atom                	100000000	         2.473 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalLessEqual/Stdlib              	229322952	         0.9864 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalGreaterEqual/Atom             	73626406	         2.923 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalGreaterEqual/Stdlib           	218723257	         1.087 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Load/Atom                          	84757734	         2.804 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Load/Stdlib                        	523445138	         0.4606 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Store/Atom                         	49170250	         4.749 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Store/Stdlib                       	56533106	         4.142 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Swap/Atom                          	47745991	         4.818 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Swap/Stdlib                        	52483106	         4.478 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64CASChanged/Atom                    	46051999	         5.007 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64CASChanged/Stdlib                  	52689351	         4.431 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64CASRejected/Atom                   	46918986	         5.060 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64CASRejected/Stdlib                 	56055120	         4.340 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Add/Atom                           	45284727	         5.014 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Add/Stdlib                         	53242228	         4.363 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64And/Atom                           	52091246	         4.879 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64And/Stdlib                         	62687736	         4.369 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Or/Atom                            	48758684	         4.869 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Or/Stdlib                          	56957067	         4.363 ns/op	       0 B/op	       0 allocs/op
-BenchmarkInt32Load/Atom                           	81981212	         2.529 ns/op	       0 B/op	       0 allocs/op
-BenchmarkInt32Load/Stdlib                         	659155950	         0.3597 ns/op	       0 B/op	       0 allocs/op
-BenchmarkInt32Add/Atom                            	48173424	         5.016 ns/op	       0 B/op	       0 allocs/op
-BenchmarkInt32Add/Stdlib                          	53531996	         4.366 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerLoad/Atom                    	245616512	         0.9568 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerLoad/Stdlib                  	175381033	         1.353 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerStore/Atom                   	39890301	         5.703 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerStore/Stdlib                 	40072129	         5.662 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerSwap/Atom                    	41808204	         6.137 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerSwap/Stdlib                  	38060198	         6.150 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerCASChanged/Atom              	32474560	         7.096 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerCASChanged/Stdlib            	32564007	         7.183 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerCASRejected/Atom             	90535288	         3.244 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerCASRejected/Stdlib           	66459902	         3.319 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValueStructLoad/Atom                     	238012122	         1.006 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValueStructLoad/Stdlib                   	223146835	         1.131 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValueStructStore/Atom                    	15724402	        14.68 ns/op	      16 B/op	       1 allocs/op
-BenchmarkValueStructStore/Stdlib                  	14839914	        15.54 ns/op	      16 B/op	       1 allocs/op
-BenchmarkValueStructSwap/Atom                     	14892032	        15.48 ns/op	      16 B/op	       1 allocs/op
-BenchmarkValueStructSwap/Stdlib                   	15602144	        15.11 ns/op	      16 B/op	       1 allocs/op
-BenchmarkValueSwapIfFuncChanged/Atom              	32558707	         6.909 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValueSwapIfFuncChanged/Stdlib            	26652747	         8.839 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValueSwapIfFuncRejected/Atom             	84798703	         2.742 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValueSwapIfFuncRejected/Stdlib           	68902158	         2.959 ns/op	       0 B/op	       0 allocs/op
-PASS
-ok  	github.com/coalaura/atom/bench	13.446s
-# sample 3: go test ./bench -run=^$ -bench=^BenchmarkParallel -benchmem -benchtime=200ms -count=1 -cpu=1,2,4,8 -timeout=30m
-goos: windows
-goarch: amd64
-pkg: github.com/coalaura/atom/bench
-cpu: AMD Ryzen 9 9950X3D 16-Core Processor          
-BenchmarkParallelLoad/Atom           	140896748	         1.672 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelLoad/Atom-2         	278609090	         0.8520 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelLoad/Atom-4         	559697576	         0.4307 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelLoad/Atom-8         	1000000000	         0.2296 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelLoad/Stdlib         	1000000000	         0.2020 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelLoad/Stdlib-2       	1000000000	         0.1058 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelLoad/Stdlib-4       	1000000000	         0.05475 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelLoad/Stdlib-8       	1000000000	         0.03436 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelAdd/Atom            	49849412	         4.499 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelAdd/Atom-2          	21049308	        10.02 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelAdd/Atom-4          	20737028	        11.83 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelAdd/Atom-8          	18304681	        13.22 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelAdd/Stdlib          	64697001	         3.634 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelAdd/Stdlib-2        	46937337	         6.222 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelAdd/Stdlib-4        	33096600	         8.104 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelAdd/Stdlib-8        	28780773	         9.083 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelCASIncrement/Atom   	41707939	         5.897 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelCASIncrement/Atom-2 	11859640	        18.11 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelCASIncrement/Atom-4 	 8150871	        28.27 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelCASIncrement/Atom-8 	 6092019	        38.21 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelCASIncrement/Stdlib           	56503825	         4.322 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelCASIncrement/Stdlib-2         	18273740	        13.08 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelCASIncrement/Stdlib-4         	12963372	        18.98 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelCASIncrement/Stdlib-8         	 9287673	        25.76 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelConditionalPair/Atom          	22448577	        11.11 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
-BenchmarkParallelConditionalPair/Atom-2        	 9307772	        23.06 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
-BenchmarkParallelConditionalPair/Atom-4        	 8459252	        27.74 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
-BenchmarkParallelConditionalPair/Atom-8        	 8474396	        28.29 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
-BenchmarkParallelConditionalPair/Stdlib        	28217367	         8.292 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
-BenchmarkParallelConditionalPair/Stdlib-2      	12129910	        22.74 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
-BenchmarkParallelConditionalPair/Stdlib-4      	 8950614	        26.60 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
-BenchmarkParallelConditionalPair/Stdlib-8      	 8786059	        27.41 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
-PASS
-ok  	github.com/coalaura/atom/bench	8.089s
-# sample 4: go test ./bench -run=^$ -bench=^Benchmark(Uint64|Int32|Conditional|Value) -benchmem -benchtime=200ms -count=1 -cpu=1 -timeout=30m
-goos: windows
-goarch: amd64
-pkg: github.com/coalaura/atom/bench
-cpu: AMD Ryzen 9 9950X3D 16-Core Processor          
-BenchmarkConditionalInt64LessChanged/Atom         	47739342	         5.130 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalInt64LessChanged/Stdlib       	59439780	         4.042 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalInt64GreaterChanged/Atom      	46639071	         5.182 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalInt64GreaterChanged/Stdlib    	58891369	         4.069 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalUint64LessChanged/Atom        	46078525	         5.144 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalUint64LessChanged/Stdlib      	58184638	         4.076 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalUint64GreaterChanged/Atom     	46961217	         5.181 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalUint64GreaterChanged/Stdlib   	58829296	         4.054 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalLessRejected/Atom             	130420322	         1.841 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalLessRejected/Stdlib           	448474904	         0.5343 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalGreaterRejected/Atom          	100000000	         2.003 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalGreaterRejected/Stdlib        	399981333	         0.5800 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalLessEqual/Atom                	100000000	         2.189 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalLessEqual/Stdlib              	238995739	         0.9293 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalGreaterEqual/Atom             	79763367	         2.802 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalGreaterEqual/Stdlib           	242364507	         0.9763 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Load/Atom                          	79459674	         2.701 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Load/Stdlib                        	529954578	         0.4114 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Store/Atom                         	49764654	         4.615 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Store/Stdlib                       	59364795	         4.121 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Swap/Atom                          	54499624	         4.735 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Swap/Stdlib                        	58842277	         4.562 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64CASChanged/Atom                    	46380396	         4.959 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64CASChanged/Stdlib                  	63833181	         4.143 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64CASRejected/Atom                   	48000000	         4.904 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64CASRejected/Stdlib                 	56078696	         4.292 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Add/Atom                           	49893974	         4.917 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Add/Stdlib                         	54258132	         4.271 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64And/Atom                           	50160932	         4.799 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64And/Stdlib                         	53945918	         4.272 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Or/Atom                            	48357847	         4.769 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Or/Stdlib                          	54478593	         4.260 ns/op	       0 B/op	       0 allocs/op
-BenchmarkInt32Load/Atom                           	102506893	         2.358 ns/op	       0 B/op	       0 allocs/op
-BenchmarkInt32Load/Stdlib                         	679101774	         0.3400 ns/op	       0 B/op	       0 allocs/op
-BenchmarkInt32Add/Atom                            	51159618	         4.929 ns/op	       0 B/op	       0 allocs/op
-BenchmarkInt32Add/Stdlib                          	57895497	         4.283 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerLoad/Atom                    	262249796	         0.9012 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerLoad/Stdlib                  	189578850	         1.254 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerStore/Atom                   	40383644	         5.694 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerStore/Stdlib                 	43009981	         5.680 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerSwap/Atom                    	38760315	         6.131 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerSwap/Stdlib                  	38628060	         5.977 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerCASChanged/Atom              	32561798	         7.067 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerCASChanged/Stdlib            	34877130	         6.997 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerCASRejected/Atom             	84790672	         3.087 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerCASRejected/Stdlib           	96138439	         3.243 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValueStructLoad/Atom                     	254597337	         0.9284 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValueStructLoad/Stdlib                   	210422211	         1.111 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValueStructStore/Atom                    	14450605	        15.29 ns/op	      16 B/op	       1 allocs/op
-BenchmarkValueStructStore/Stdlib                  	14906184	        14.92 ns/op	      16 B/op	       1 allocs/op
-BenchmarkValueStructSwap/Atom                     	14310074	        15.50 ns/op	      16 B/op	       1 allocs/op
-BenchmarkValueStructSwap/Stdlib                   	15249714	        15.50 ns/op	      16 B/op	       1 allocs/op
-BenchmarkValueSwapIfFuncChanged/Atom              	32899696	         7.050 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValueSwapIfFuncChanged/Stdlib            	25759916	         8.661 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValueSwapIfFuncRejected/Atom             	100000000	         3.086 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValueSwapIfFuncRejected/Stdlib           	68442364	         3.391 ns/op	       0 B/op	       0 allocs/op
-PASS
-ok  	github.com/coalaura/atom/bench	13.515s
-# sample 4: go test ./bench -run=^$ -bench=^BenchmarkParallel -benchmem -benchtime=200ms -count=1 -cpu=1,2,4,8 -timeout=30m
-goos: windows
-goarch: amd64
-pkg: github.com/coalaura/atom/bench
-cpu: AMD Ryzen 9 9950X3D 16-Core Processor          
-BenchmarkParallelLoad/Atom           	141250168	         1.737 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelLoad/Atom-2         	280187258	         0.8593 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelLoad/Atom-4         	556396590	         0.4335 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelLoad/Atom-8         	1000000000	         0.2319 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelLoad/Stdlib         	1000000000	         0.2099 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelLoad/Stdlib-2       	1000000000	         0.1032 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelLoad/Stdlib-4       	1000000000	         0.05397 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelLoad/Stdlib-8       	1000000000	         0.04002 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelAdd/Atom            	57275134	         4.204 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelAdd/Atom-2          	20940397	        11.47 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelAdd/Atom-4          	19988340	        12.12 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelAdd/Atom-8          	15805278	        14.42 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelAdd/Stdlib          	57463008	         4.008 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelAdd/Stdlib-2        	41455072	         6.115 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelAdd/Stdlib-4        	36078831	         6.899 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelAdd/Stdlib-8        	32419726	         7.687 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelCASIncrement/Atom   	41681862	         5.734 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelCASIncrement/Atom-2 	13734769	        17.47 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelCASIncrement/Atom-4 	 8890929	        27.18 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelCASIncrement/Atom-8 	 6930426	        34.84 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelCASIncrement/Stdlib           	56859910	         4.292 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelCASIncrement/Stdlib-2         	17650432	        13.40 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelCASIncrement/Stdlib-4         	14090625	        19.15 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelCASIncrement/Stdlib-8         	10166475	        26.34 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelConditionalPair/Atom          	22492549	        11.11 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
-BenchmarkParallelConditionalPair/Atom-2        	 9398532	        25.13 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
-BenchmarkParallelConditionalPair/Atom-4        	 8513626	        27.64 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
-BenchmarkParallelConditionalPair/Atom-8        	 8279487	        29.47 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
-BenchmarkParallelConditionalPair/Stdlib        	28361754	         8.281 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
-BenchmarkParallelConditionalPair/Stdlib-2      	12338125	        21.28 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
-BenchmarkParallelConditionalPair/Stdlib-4      	 9055953	        26.53 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
-BenchmarkParallelConditionalPair/Stdlib-8      	 8822718	        27.86 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
-PASS
-ok  	github.com/coalaura/atom/bench	8.146s
-# sample 5: go test ./bench -run=^$ -bench=^Benchmark(Uint64|Int32|Conditional|Value) -benchmem -benchtime=200ms -count=1 -cpu=1 -timeout=30m
-goos: windows
-goarch: amd64
-pkg: github.com/coalaura/atom/bench
-cpu: AMD Ryzen 9 9950X3D 16-Core Processor          
-BenchmarkConditionalInt64LessChanged/Atom         	46754460	         5.119 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalInt64LessChanged/Stdlib       	60406231	         4.024 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalInt64GreaterChanged/Atom      	46586563	         5.154 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalInt64GreaterChanged/Stdlib    	58742901	         4.050 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalUint64LessChanged/Atom        	46959379	         5.164 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalUint64LessChanged/Stdlib      	59123493	         4.066 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalUint64GreaterChanged/Atom     	46017562	         5.187 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalUint64GreaterChanged/Stdlib   	58814880	         4.055 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalLessRejected/Atom             	133931336	         1.806 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalLessRejected/Stdlib           	460150928	         0.5121 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalGreaterRejected/Atom          	120029166	         2.004 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalGreaterRejected/Stdlib        	401383434	         0.5876 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalLessEqual/Atom                	100000000	         2.349 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalLessEqual/Stdlib              	260202654	         0.9208 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalGreaterEqual/Atom             	77639750	         2.727 ns/op	       0 B/op	       0 allocs/op
-BenchmarkConditionalGreaterEqual/Stdlib           	231329313	         0.9965 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Load/Atom                          	79069614	         2.725 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Load/Stdlib                        	593339760	         0.3992 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Store/Atom                         	55268974	         4.898 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Store/Stdlib                       	58160080	         4.105 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Swap/Atom                          	54436580	         4.616 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Swap/Stdlib                        	44081182	         4.545 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64CASChanged/Atom                    	46979602	         4.765 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64CASChanged/Stdlib                  	61709348	         4.164 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64CASRejected/Atom                   	53218617	         4.917 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64CASRejected/Stdlib                 	54598812	         4.166 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Add/Atom                           	43344770	         4.905 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Add/Stdlib                         	62812425	         4.128 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64And/Atom                           	48988588	         4.817 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64And/Stdlib                         	53899880	         4.200 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Or/Atom                            	57216420	         4.743 ns/op	       0 B/op	       0 allocs/op
-BenchmarkUint64Or/Stdlib                          	53741769	         4.280 ns/op	       0 B/op	       0 allocs/op
-BenchmarkInt32Load/Atom                           	100000000	         2.022 ns/op	       0 B/op	       0 allocs/op
-BenchmarkInt32Load/Stdlib                         	693038714	         0.3228 ns/op	       0 B/op	       0 allocs/op
-BenchmarkInt32Add/Atom                            	49964607	         4.853 ns/op	       0 B/op	       0 allocs/op
-BenchmarkInt32Add/Stdlib                          	64896435	         3.920 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerLoad/Atom                    	305319816	         0.7836 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerLoad/Stdlib                  	282946796	         1.086 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerStore/Atom                   	47443956	         5.535 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerStore/Stdlib                 	47192071	         5.557 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerSwap/Atom                    	38696570	         5.849 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerSwap/Stdlib                  	46507120	         5.863 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerCASChanged/Atom              	39190711	         6.616 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerCASChanged/Stdlib            	32724297	         6.921 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerCASRejected/Atom             	80056039	         3.073 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValuePointerCASRejected/Stdlib           	65065335	         3.296 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValueStructLoad/Atom                     	228150110	         1.031 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValueStructLoad/Stdlib                   	220758673	         1.168 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValueStructStore/Atom                    	15190737	        15.10 ns/op	      16 B/op	       1 allocs/op
-BenchmarkValueStructStore/Stdlib                  	15651493	        15.38 ns/op	      16 B/op	       1 allocs/op
-BenchmarkValueStructSwap/Atom                     	14447474	        16.03 ns/op	      16 B/op	       1 allocs/op
-BenchmarkValueStructSwap/Stdlib                   	14620862	        15.78 ns/op	      16 B/op	       1 allocs/op
-BenchmarkValueSwapIfFuncChanged/Atom              	32967938	         7.129 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValueSwapIfFuncChanged/Stdlib            	27336720	         8.985 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValueSwapIfFuncRejected/Atom             	100000000	         3.029 ns/op	       0 B/op	       0 allocs/op
-BenchmarkValueSwapIfFuncRejected/Stdlib           	65137738	         3.236 ns/op	       0 B/op	       0 allocs/op
-PASS
-ok  	github.com/coalaura/atom/bench	13.637s
-# sample 5: go test ./bench -run=^$ -bench=^BenchmarkParallel -benchmem -benchtime=200ms -count=1 -cpu=1,2,4,8 -timeout=30m
-goos: windows
-goarch: amd64
-pkg: github.com/coalaura/atom/bench
-cpu: AMD Ryzen 9 9950X3D 16-Core Processor          
-BenchmarkParallelLoad/Atom           	140183230	         1.727 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelLoad/Atom-2         	277864610	         0.8530 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelLoad/Atom-4         	563867377	         0.4276 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelLoad/Atom-8         	1000000000	         0.2271 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelLoad/Stdlib         	1000000000	         0.2176 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelLoad/Stdlib-2       	1000000000	         0.1045 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelLoad/Stdlib-4       	1000000000	         0.05504 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelLoad/Stdlib-8       	1000000000	         0.04032 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelAdd/Atom            	49561176	         4.622 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelAdd/Atom-2          	25154331	        10.81 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelAdd/Atom-4          	19591836	        11.98 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelAdd/Atom-8          	17732853	        13.43 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelAdd/Stdlib          	66897088	         3.744 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelAdd/Stdlib-2        	41189695	         6.080 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelAdd/Stdlib-4        	37136180	         7.091 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelAdd/Stdlib-8        	32098435	         7.751 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelCASIncrement/Atom   	42449325	         5.839 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelCASIncrement/Atom-2 	13898781	        17.49 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelCASIncrement/Atom-4 	 9037606	        26.61 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelCASIncrement/Atom-8 	 7035234	        34.57 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelCASIncrement/Stdlib           	58307620	         4.305 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelCASIncrement/Stdlib-2         	19252520	        12.79 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelCASIncrement/Stdlib-4         	13791358	        19.21 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelCASIncrement/Stdlib-8         	10433376	        25.37 ns/op	       0 B/op	       0 allocs/op
-BenchmarkParallelConditionalPair/Atom          	22629340	        11.03 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
-BenchmarkParallelConditionalPair/Atom-2        	10542637	        22.89 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
-BenchmarkParallelConditionalPair/Atom-4        	 8541562	        27.85 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
-BenchmarkParallelConditionalPair/Atom-8        	 8963250	        28.77 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
-BenchmarkParallelConditionalPair/Stdlib        	28809794	         8.288 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
-BenchmarkParallelConditionalPair/Stdlib-2      	10960605	        23.25 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
-BenchmarkParallelConditionalPair/Stdlib-4      	 9072283	        26.27 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
-BenchmarkParallelConditionalPair/Stdlib-8      	 8752989	        27.48 ns/op	         2.000 calls/op	       0 B/op	       0 allocs/op
-PASS
-ok  	github.com/coalaura/atom/bench	8.237s
-# complete
+ok  	github.com/coalaura/atom/bench	17.951s

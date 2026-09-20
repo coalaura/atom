@@ -1,11 +1,11 @@
-# label atom_ns atom_min atom_max stdlib_ns stdlib_min stdlib_max atom_B stdlib_B atom_allocs stdlib_allocs ratio
-"PointerCASChanged"	7.067	6.616	7.222	6.96	6.774	7.183	0	0	0	0	1.01537
-"PointerCASRejected"	3.087	2.784	3.322	3.296	3.243	3.392	0	0	0	0	0.93659
-"PointerLoad"	0.909	0.7836	0.9568	1.353	1.086	1.412	0	0	0	0	0.67184
-"PointerStore"	5.703	5.535	5.881	5.68	5.557	5.868	0	0	0	0	1.00405
-"PointerSwap"	6.131	5.81	6.243	5.977	5.85	6.15	0	0	0	0	1.02577
-"StructLoad"	1.006	0.8224	1.042	1.131	1.059	1.262	0	0	0	0	0.889478
-"StructStore"	15.1	14.68	16.1	15.38	13.87	15.54	16	16	1	1	0.981795
-"StructSwap"	15.5	13.48	16.36	15.5	12.91	15.83	16	16	1	1	1
-"SwapIfFuncChanged"	7.05	6.743	7.239	8.839	8.367	8.985	0	0	0	0	0.797602
-"SwapIfFuncRejected"	2.861	2.474	3.086	2.959	2.525	3.391	0	0	0	0	0.966881
+# case	atom_ns	stdlib_ns	atom_B	stdlib_B	atom_allocs	stdlib_allocs
+PointerCASChanged	7.211	6.888	0	0	0	0
+PointerCASRejected	2.718	2.920	0	0	0	0
+PointerLoad	0.7520	1.054	0	0	0	0
+PointerStore	5.547	5.598	0	0	0	0
+PointerSwap	5.890	5.794	0	0	0	0
+StructLoad	0.8244	1.056	0	0	0	0
+StructStore	13.61	13.24	16	16	1	1
+StructSwap	16.47	18.82	16	16	1	1
+SwapIfFuncChanged	6.872	8.695	0	0	0	0
+SwapIfFuncRejected	2.942	3.329	0	0	0	0

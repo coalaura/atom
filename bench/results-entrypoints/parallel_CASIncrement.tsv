@@ -1,5 +1,0 @@
-# label atom_ns atom_min atom_max stdlib_ns stdlib_min stdlib_max atom_B stdlib_B atom_allocs stdlib_allocs ratio
-1	4.17	4.084	4.25	4.28	4.079	4.416	0	0	0	0	0.974299
-2	12.22	11.41	12.86	12.6	10.89	12.83	0	0	0	0	0.969841
-4	18.71	17.99	19.42	19.29	18.87	20.31	0	0	0	0	0.969933
-8	25.15	24.63	26.04	25.1	22.9	25.58	0	0	0	0	1.00199
