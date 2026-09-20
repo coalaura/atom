@@ -1,11 +1,14 @@
 # atom
 
-Generic `sync/atomic.Value`.
+Generic atomic values and integers.
 
 ```go
 var v atom.Value[int]
 v.Store(42)
 n := v.Load() // int, not any
+
+var counter atom.Int[int]
+counter.Add(1)
 ```
 
 Drop-in semantics of `sync/atomic.Value`, typed with generics so callers don't cast.
